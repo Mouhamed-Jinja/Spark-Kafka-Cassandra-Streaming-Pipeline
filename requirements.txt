@@ -1,0 +1,6 @@
+apache-airflow
+apache-airflow-providers-apache-spark
+pyspark
+SQLAlchemy
+kafka-python
+cassandra-driver
