@@ -1,10 +1,9 @@
 # Data Engineering Project
 
-an end-to-end data streaming pipeline, seamlessly integrating Python, Kafka, Spark Streaming, Docker, and Airflow.for streaming data from API to kafka, and then streaming data to Cassandra using Spark streaming. Effortlessly process, transmit, and analyze real-time data with this comprehensive project, designed for efficient and scalable streaming applications
-
+This project presents a comprehensive data streaming pipeline, integrating Python, Kafka, Spark Streaming, Docker, and Airflow. It enables streaming data from an API to Kafka, and subsequently to Cassandra using Spark Streaming. This project is designed to process, transmit, and analyze real-time data efficiently and at scale.
 
 ## Introduction
-This repository uses [Docker Compose](https://docs.docker.com/compose/) to initialize the cluster inferstructure including the following:
+This repository leverages [Docker Compose](https://docs.docker.com/compose/) to set up the cluster infrastructure, which includes:
 
 - Spark
 - Kafka
@@ -12,68 +11,65 @@ This repository uses [Docker Compose](https://docs.docker.com/compose/) to initi
 - Airflow
 - Python
 
-
 ## Quick Start
 
-1- Just clone the repo
-```
-./start_demo.sh
-```
-2-Build airflow image, which expnded to run spark jobs. i have used the official airflow-spark image from the doc
-  -you can check this Repo for more info
+1. Clone the repository and start the demo:
   ```
+  https://github.com/Mouhamed-Jinja/Spark-Kafka-Cassandra-Streaming-Pipeline.git
   ```
+
+2. Build the Airflow image, which is extended to run Spark jobs. The official Airflow-Spark image from the documentation is used. For more information, refer to the provided repository link.
   -Build command
   ```
   docker build -t airspark:4.0 .
   ```
-3- Up the docker-compose file
-```
-docker-compose up -d
-```
+3. Launch the Docker Compose file:
+  ```
+  docker-compose up -d
+  ```
 
-4- then you have to use pip to install cassandra driver inside spark nodes,
-    BTW, you can expand the spark binami image to include cassandra driver.
-```
-  pip intsll cassandra-driver
-```
+4. Install the Cassandra driver inside Spark nodes using pip. Alternatively, you can extend the Spark Bitnami image to include the Cassandra driver.
+  ```
+    pip intsll cassandra-driver
+  ```
 
-5- then you have to install kafka API in your machine. to enable you use KafkaProducer, and Consumer.
-```
-pip install kafka-python
-```
-6- and finally create the kafka topic:
-```
-docker exec -it broker
-kafka-topics --create --topic users --partitions 3 --replication-factor 1 --bootstrap-server localhost:9092
-```
-## Run the applcation
-After following the prevous setup steps, you now ready to start streaming.
-1- first way open airflow webserver UI and run the dag.
+5. Install the Kafka API on your machine to enable the use of KafkaProducer and Consumer.
+  ```
+  pip install kafka-python
+  ```
+6. Finally, create the Kafka topic:
+  ```
+  docker exec -it broker
+  kafka-topics --create --topic users --partitions 3 --replication-factor 1 --bootstrap-server localhost:9092
+  ```
+
+## Running the Application
+After completing the setup steps, you are ready to start streaming.
+
+1. Open the Airflow webserver UI and run the DAG.
   ```
   http://localhost:8080/login/
   ```
   -user: airflow
   -password: airflow
 
-2-you can use CMD to run the application
-  - run the Producer:
+2. Alternatively, you can use the command line to run the application.
+  - Run the Producer:
   ```
   cd app
   python kafka_streaming_producer.py
   ```
-  - use spark submit to run the spark Job
+  - use spark-submit to run the spark Job
   ```
   docker exec -it spark-master bash
   cd app
   spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0,com.datastax.spark:spark-cassandra-connector_2.12:3.4.0 spark.py
   ```
 
-
-
 ## Using "cqlsh" Cassandra Query Language Shell
-Here you can use cqlsh to run your sql batch scripts on the data that loaded into Cassandra
- - At first go into cassandra container:
+You can use cqlsh to execute your SQL batch scripts on the data loaded into Cassandra.
+
+- Enter the Cassandra container:
   ```
   docker exec -it cassandra bash
   ```
