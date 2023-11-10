@@ -2,6 +2,8 @@
 
 This project presents a comprehensive data streaming pipeline, integrating Python, Kafka, Spark Streaming, Docker, and Airflow. It enables streaming data from an API to Kafka, and subsequently to Cassandra using Spark Streaming. This project is designed to process, transmit, and analyze real-time data efficiently and at scale.
 
+<img width="906" alt="streaming2" src="https://github.com/Mouhamed-Jinja/Spark-Kafka-Cassandra-Streaming-Pipeline/assets/132110499/d1780284-4124-4c6a-90f3-d73f94b4e491">
+
 ## Introduction
 This repository leverages [Docker Compose](https://docs.docker.com/compose/) to set up the cluster infrastructure, which includes:
 
